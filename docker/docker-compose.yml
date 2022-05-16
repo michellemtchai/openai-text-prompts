@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: ./docker/dev.dockerfile
+    command: yarn start
+    volumes:
+      - ..:/app
+    ports:
+      - ${FRONTEND_PORT}:${FRONTEND_PORT}
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      FRONTEND_PORT: ${FRONTEND_PORT}
+      FAST_REFRESH: ${FAST_REFRESH}
+      CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING}
+      OPENAI_SECRET: ${OPENAI_SECRET}
