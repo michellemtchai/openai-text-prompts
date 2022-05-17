@@ -21,6 +21,7 @@ const App = () => {
       const { msg } = data;
       setLoading(false);
       if (res.status === 200) {
+        setPrompt('');
         setLog([
           {
             prompt: prompt,
@@ -35,7 +36,6 @@ const App = () => {
       setLoading(false);
       setError(err.message);
     }
-    setPrompt('');
   };
 
   const handleSubmit = (event) => {
