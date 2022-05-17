@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import ResponseEntry from './ResponseEntry';
 
 const ListItem = styled.li`
   list-style: none;
@@ -13,9 +14,10 @@ const ListItem = styled.li`
 const Response = ({ prompt, response }) => {
   return (
     <ListItem>
-      <b>Prompt:</b> {prompt}
-      <br />
-      <b>Response:</b> {response}
+      <dl>
+        <ResponseEntry label="Prompt" value={prompt} />
+        <ResponseEntry label="Response" value={response} />
+      </dl>
     </ListItem>
   );
 };
