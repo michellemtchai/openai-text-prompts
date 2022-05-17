@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from './components/Layout';
 import PromptForm from './components/PromptForm';
 import Responses from './components/Responses';
+
+const STORAGE_KEY = 'response-log';
 
 const App = () => {
   const [prompt, setPrompt] = useState('');
   const [log, setLog] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const storedLog = localStorage.getItem(STORAGE_KEY);
+    if (storedLog) {
+      setLog(JSON.parse(storedLog));
+    }
+  }, []);
 
   const submitPrompt = async (prompt) => {
     setError(null);
@@ -21,14 +30,8 @@ const App = () => {
       const { msg } = data;
       setLoading(false);
       if (res.status === 200) {
+        addToLog(prompt, msg);
         setPrompt('');
-        setLog([
-          {
-            prompt: prompt,
-            response: msg,
-          },
-          ...log,
-        ]);
       } else {
         setError(msg);
       }
@@ -38,11 +41,23 @@ const App = () => {
     }
   };
 
+  const addToLog = (prompt, response) => {
+    const newLog = [
+      {
+        prompt,
+        response,
+      },
+      ...log,
+    ];
+    setLog(newLog);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newLog));
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const newPrompt = prompt.trim();
     if (newPrompt.length === 0) {
-      setError('Please enter a prompt.');
+      setError('Your prompt cannot be empty or made of whitespace.');
     } else {
       submitPrompt(newPrompt);
     }
