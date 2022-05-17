@@ -34,15 +34,18 @@ const Prompt = ({
     error,
     required,
 }) => {
+    const ariaLabel = `${name}Label`;
     const ariaDesc = `${name}Desc`;
     return (
         <FieldSet>
             {error && (
-                <FieldError id={ariaDesc}>
+                <FieldError id={ariaDesc} aria-live="aggressive">
                     <b>Error:</b> {error}
                 </FieldError>
             )}
-            <Label htmlFor={name}>{label}:</Label>
+            <Label id={ariaLabel} htmlFor={name}>
+                {label}:
+            </Label>
             <StyledInput
                 id={name}
                 name={name}
@@ -51,6 +54,7 @@ const Prompt = ({
                 onChange={onChange}
                 aria-label={label}
                 aria-required={required}
+                aria-labelledby={ariaLabel}
                 aria-describedby={ariaDesc}
             />
         </FieldSet>
