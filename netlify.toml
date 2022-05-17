@@ -1,0 +1,7 @@
+[build]
+    command = "yarn build"
+    functions = "built-lambda" # netlify-lambda builds to this folder AND Netlify reads functions from here
+    publish = "build" # serve all these files statically
+
+[functions]
+  node_bundler = "esbuild"

@@ -5,14 +5,16 @@ services:
     build:
       context: ../
       dockerfile: ./docker/dev.dockerfile
-    command: yarn start
+    command: netlify dev --port "$FRONTEND_PORT" --functionsPort "$FUNCTIONS_PORT"
     volumes:
       - ..:/app
     ports:
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
+      - ${FUNCTIONS_PORT}:${FUNCTIONS_PORT}
     environment:
       NODE_ENV: ${NODE_ENV}
       FRONTEND_PORT: ${FRONTEND_PORT}
+      REACT_APP_FUNCTIONS_PORT: ${FUNCTIONS_PORT}
       FAST_REFRESH: ${FAST_REFRESH}
       CHOKIDAR_USEPOLLING: ${CHOKIDAR_USEPOLLING}
       OPENAI_SECRET: ${OPENAI_SECRET}
