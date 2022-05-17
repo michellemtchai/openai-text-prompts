@@ -22,6 +22,7 @@ const StyledInput = styled.textarea`
     width: 100%;
     min-height: 100px;
     resize: none;
+    padding: 10px;
 `;
 
 const Prompt = ({
