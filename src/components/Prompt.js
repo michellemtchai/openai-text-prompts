@@ -39,7 +39,7 @@ const Prompt = ({
     return (
         <FieldSet>
             {error && (
-                <FieldError id={ariaDesc} aria-live="aggressive">
+                <FieldError id={ariaDesc}>
                     <b>Error:</b> {error}
                 </FieldError>
             )}
