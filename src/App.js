@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import Layout from './components/Layout';
+import PromptForm from './components/PromptForm';
+import Responses from './components/Responses';
 
 const App = () => {
   const [prompt, setPrompt] = useState('');
@@ -29,12 +32,14 @@ const App = () => {
         setError(msg);
       }
     } catch (err) {
+      setLoading(false);
       setError(err.message);
     }
     setPrompt('');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     const newPrompt = prompt.trim();
     if (newPrompt.length === 0) {
       setError('Please enter a prompt.');
@@ -48,27 +53,16 @@ const App = () => {
   };
 
   return (
-    <main>
-      <article>
-        <h1>Fun With AI</h1>
-        {error && <p>{error}</p>}
-        <textarea onChange={handleChange} value={prompt} />
-        {loading ? (
-          <button disabled>Loading...</button>
-        ) : (
-          <button onClick={handleSubmit}>Submit</button>
-        )}
-        <ul>
-          {log.map((entry, i) => (
-            <li key={i}>
-              <b>Prompt:</b> {entry.prompt}
-              <br />
-              <b>Response:</b> {entry.response}
-            </li>
-          ))}
-        </ul>
-      </article>
-    </main>
+    <Layout title="Fun With AI">
+      <PromptForm
+        value={prompt}
+        onChange={handleChange}
+        onSubmit={handleSubmit}
+        loading={loading}
+        error={error}
+      />
+      <Responses log={log} />
+    </Layout>
   );
 };
 

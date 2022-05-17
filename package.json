@@ -3,18 +3,18 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "react": "^18.1.0",
-    "react-dom": "^18.1.0",
-    "react-scripts": "5.0.1",
-    "node-fetch": "^2.0.0"
+    "node-fetch": "^2.0.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-scripts": "3.4.3",
+    "styled-components": "^5.3.5"
   },
   "scripts": {
     "prestart": "yarn --no-bin-links install",
-    "start": "PORT=\"$FRONTEND_PORT\" react-scripts start",
-    "start:lambda": "netlify-lambda serve src/lambda",
-    "build": "yarn build:app & yarn build:lambda",
-    "build:app": "react-scripts build",
-    "build:lambda": "netlify-lambda build src/lambda"
+    "start": "netlify dev --port \"$FRONTEND_PORT\" --functionsPort \"$FUNCTIONS_PORT\" --live",
+    "start:app": "PORT=\"$FRONTEND_PORT\" react-scripts start",
+    "build": "netlify build",
+    "build:app": "react-scripts build"
   },
   "devDependencies": {
     "babel-loader": "^8.0.4",
