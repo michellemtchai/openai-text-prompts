@@ -26,14 +26,18 @@ const App = () => {
         method: 'POST',
         body: JSON.stringify({ prompt }),
       });
+      if (res.status !== 200) {
+        setError(await res.text());
+        return;
+      }
       const data = await res.json();
       const { msg } = data;
       setLoading(false);
-      if (res.status === 200 && msg.error === undefined) {
+      if (!('error' in msg)) {
         addToLog(prompt, msg);
         setPrompt('');
       } else {
-        setError(msg);
+        setError(msg.error.message);
       }
     } catch (err) {
       setLoading(false);
@@ -42,6 +46,7 @@ const App = () => {
   };
 
   const addToLog = (prompt, response) => {
+    console.log('add to log', prompt, response);
     const newLog = [
       {
         prompt,
