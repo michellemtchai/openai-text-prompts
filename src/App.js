@@ -28,6 +28,7 @@ const App = () => {
       });
       if (res.status !== 200) {
         setError(await res.text());
+        setLoading(false);
         return;
       }
       const data = await res.json();
@@ -46,7 +47,6 @@ const App = () => {
   };
 
   const addToLog = (prompt, response) => {
-    console.log('add to log', prompt, response);
     const newLog = [
       {
         prompt,

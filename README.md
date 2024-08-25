@@ -18,7 +18,7 @@ copy .\docker\dev.env .env
 
 Then, open up the newly created file `.env`. Replace the value for `OPENAI_SECRET` with your own OpenAI secret API key.
 
-You can also modify the `FRONTEND_PORT` and `FUNCTIONS_PORT` in `.env` if the port is not available.
+You can also modify the `SERVER_PORT`, `FRONTEND_PORT` and `FUNCTIONS_PORT` in `.env` if the port is not available.
 
 To start the app, run the following:
 

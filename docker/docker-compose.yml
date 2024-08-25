@@ -10,10 +10,12 @@ services:
     volumes:
       - ..:/app
     ports:
+      - ${SERVER_PORT}:${SERVER_PORT}
       - ${FRONTEND_PORT}:${FRONTEND_PORT}
       - ${FUNCTIONS_PORT}:${FUNCTIONS_PORT}
     environment:
       NODE_ENV: ${NODE_ENV}
+      SERVER_PORT: ${SERVER_PORT}
       FRONTEND_PORT: ${FRONTEND_PORT}
       FUNCTIONS_PORT: ${FUNCTIONS_PORT}
       REACT_APP_FUNCTIONS_PORT: ${FUNCTIONS_PORT}
