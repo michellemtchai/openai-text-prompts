@@ -1,4 +1,4 @@
-FROM node:16-alpine
+FROM node:18-alpine
 
 RUN yarn global add \
         react-scripts@3.4.3 \

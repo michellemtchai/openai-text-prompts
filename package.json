@@ -11,7 +11,7 @@
     "styled-components": "^5.3.5"
   },
   "scripts": {
-    "prestart": "yarn --no-bin-links install",
+    "prestart": "yarn install && netlify login",
     "start": "netlify dev --port \"$FRONTEND_PORT\" --functionsPort \"$FUNCTIONS_PORT\" --live",
     "start:app": "PORT=\"$FRONTEND_PORT\" react-scripts start",
     "build": "react-scripts build"

@@ -17,10 +17,10 @@ const postCompletion = async (event, context) => {
       }),
     });
     const data = await response.json();
-    const reply = data.choices[0]?.text;
+    // const reply = data.choices[0]?.text;
     return {
       statusCode: 200,
-      body: JSON.stringify({ msg: reply }),
+      body: JSON.stringify({ msg: data }),
     };
   } catch (err) {
     console.log(err); // output to netlify function log
