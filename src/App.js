@@ -29,7 +29,7 @@ const App = () => {
       const data = await res.json();
       const { msg } = data;
       setLoading(false);
-      if (res.status === 200 && !msg.error) {
+      if (res.status === 200 && msg.error === undefined) {
         addToLog(prompt, msg);
         setPrompt('');
       } else {
